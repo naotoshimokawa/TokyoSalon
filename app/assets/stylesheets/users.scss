@@ -1,4 +1,3 @@
-/* 新規ユーザー作成フォーム ================================ */
 .name-field, .email-field {
   width: 45%;
 }
@@ -19,14 +18,16 @@
 .user-list li {
   overflow: auto;
   padding: 10px 0;
+  margin-left: 5%;
   border-bottom: 1px solid #eaeaea;
 }
 
 .user-list img {
   display: inline-block;
   padding: 5px 0;
-  margin-right: 5px;
+  margin-right: 2%;
   float: left;
+  width: 56px;
 }
 
 .user-list a {
@@ -40,6 +41,7 @@
   width: 34%;
   float: left;
   margin-bottom: 30px;
+  margin-right: 10%;
 }
 
 .label {

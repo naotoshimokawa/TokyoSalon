@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :like_notes]
 
   def index
     @users = User.all
@@ -9,23 +11,7 @@ class UsersController < ApplicationController
     @notes = @user.notes
   end
 
-  def new
-    @user = User.new
-  end
-
   def edit
-  end
-
-  def create
-    @user = User.new(user_params)
-    file = params[:user][:image]
-    @user.set_image(file)
-
-    if @user.save
-      redirect_to @user, notice: 'ユーザーが保存されました'
-    else
-      render :new
-    end
   end
 
   def update
@@ -39,10 +25,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    @user.destroy
-    redirect_to users_url, notice: 'ユーザーが削除されました'
+  def like_notes
   end
+
 
   private
 
@@ -52,5 +37,12 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email)
+    end
+
+    def correct_user
+      user = User.find(params[:id])
+      if !current_user?(user)
+        redirect_to root_path, alert: '許可されていないページです'
+      end
     end
 end

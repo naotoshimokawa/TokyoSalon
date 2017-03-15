@@ -5,5 +5,14 @@
       </span>
       <span class="content">
         <%= link_to note.title, note_path(note.id) %>
+
+        <div>
+              <small>
+                    <%= note.likes.count %>人がいいね！といってます
+              </small>
+        </div>
+      </span>
+      <span>
+      	<%= note.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
       </span>
 </li>
